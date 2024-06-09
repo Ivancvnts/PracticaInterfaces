@@ -1,7 +1,10 @@
 # UTAD-UI-FPS-Public
- 
+-------------------HUD--------------------------------------------------------------------------------
 Para la mayoria de widgets que se muestran en pantalla use delegados, de esa manera cada que se realize una acción que le interese a cada widget estos sabran no solamente que sucedio esta acción o envento, si no que ademas se transmite en caso de ser necesario información relevante para cada widget, por ejemplo la barra de vida se le transmite la vida actual de jugador, cada que la vida cambia, independientemente si baja o sube (Aunque no hay nada que suba la vida por el momento). Otr ejemplo es el contador de munición que tambien se actualiza cada que el jugador dispara o recarga.
 
 Para el crosshair tambien use un delegado y aqui use una UWidgetAnimation para hacer una animación que hace mas grande el crosshair y despues lo regresa a su tamaño original.
 
 El que se suscribe a los delegados es el PlayerHUD y este mismo le pasa la información al widget que lo necesite ya que aqui tengo referencia a los widgets que se estan mostrando, de esta manera el PlayerHUD gestiona la información y los widgets solamente se actualizan con la información que les proporciona el PlayerHUD.
+-------------PANTALLAS------------------------------------------------------------------------------------
+
+Para el Arbol de mejoras primero cree un IA y lo configure en el IMC para abrir el menu con el tabulador e implemente la logica requerida para que funcione el input en la clase Character, el widget que se abre es el arbol de mejoras, este widget contiene varios widgets que heredan de la la clase Power UP, estos widgets tienen propiedades para elegir si deben de estar disponibles desde el inicio, asi como una referenci a la siguiente mejora que desbloquean, este widget usa un boton y una progress bar que avanza a medida que el usurio deja presionado sobre el boton, si no lo presiona el suficiente tiempo la progress bar regresa a 0 y no se obtiene la mejora.
