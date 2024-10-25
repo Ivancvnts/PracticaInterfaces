@@ -58,7 +58,7 @@ public:
 	
 protected:
 	virtual void BeginPlay();
-
+	virtual void Tick(float DeltaTime) override;
 public:
 		
 	/** Look Input Action */

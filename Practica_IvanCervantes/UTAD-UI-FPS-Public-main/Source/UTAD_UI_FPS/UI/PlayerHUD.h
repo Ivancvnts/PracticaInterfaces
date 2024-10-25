@@ -32,10 +32,10 @@ public:
 	/** Hide all the widgets */
 	UFUNCTION(BlueprintCallable, Category = Visibility)
 	void Hide();
-
+	void UpdateCrosshair(bool EnemyInSight);
 	void UpdateHealthBar(int Health, int MaxHealth);
-
 	void StartSplashAnimation();
+	void PlayHitAnimation();
 protected:
 
 	UFUNCTION()
@@ -58,5 +58,6 @@ protected:
 	TObjectPtr<UAmmoCounter> AmmoCounter;
 	UPROPERTY(Transient, meta = (BindWidgetAnim))
 	TObjectPtr<UWidgetAnimation> BeginSplash;
-
+	UPROPERTY(Transient, meta = (BindWidgetAnim))
+	TObjectPtr<UWidgetAnimation> HitAnimation;
 };

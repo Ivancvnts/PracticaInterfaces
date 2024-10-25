@@ -6,6 +6,9 @@
 #include "Blueprint/UserWidget.h"
 #include "PowerUpsTree.generated.h"
 
+class UGridPanel;
+class UTextBlock;
+class UCanvasPanel;
 class UButton;
 class UPowerUp;
 /**
@@ -17,7 +20,7 @@ class UTAD_UI_FPS_API UPowerUpsTree : public UUserWidget
 	GENERATED_BODY()
 
 public:
-
+	
 	bool isOpen = false;
 	
 protected:
@@ -25,35 +28,20 @@ protected:
 
 	UFUNCTION()
 	void OnButtonPressed();
+	UFUNCTION()
+	void OnPowerUpObtained(int cost);
+
+	TArray<UPowerUp*> PowerUps;
 
 	UPROPERTY(VisibleAnywhere, meta = (BindWidget))
-	TObjectPtr<UPowerUp> Damage1;
-
-	UPROPERTY(VisibleAnywhere, meta = (BindWidget))
-	TObjectPtr<UPowerUp> Damage2;
-
-	UPROPERTY(VisibleAnywhere, meta = (BindWidget))
-	TObjectPtr<UPowerUp> Damage3;
-
-	UPROPERTY(VisibleAnywhere, meta = (BindWidget))
-	TObjectPtr<UPowerUp> Speed1;
-
-	UPROPERTY(VisibleAnywhere, meta = (BindWidget))
-	TObjectPtr<UPowerUp> Speed2;
-
-	UPROPERTY(VisibleAnywhere, meta = (BindWidget))
-	TObjectPtr<UPowerUp> Speed3;
-
-	UPROPERTY(VisibleAnywhere, meta = (BindWidget))
-	TObjectPtr<UPowerUp> Health1;
-
-	UPROPERTY(VisibleAnywhere, meta = (BindWidget))
-	TObjectPtr<UPowerUp> Health2;
-
-	UPROPERTY(VisibleAnywhere, meta = (BindWidget))
-	TObjectPtr<UPowerUp> Health3;
+	TObjectPtr<UGridPanel> GridPanel;
 
 	UPROPERTY(VisibleAnywhere, meta = (BindWidget))
 	TObjectPtr<UButton> CloseButton;
-	
+
+	UPROPERTY(VisibleAnywhere, meta = (BindWidget))
+	TObjectPtr<UTextBlock> PointsText;
+
+	UPROPERTY(EditAnywhere, Category = "Options")
+	int Points = 100;
 };

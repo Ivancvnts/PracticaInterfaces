@@ -8,7 +8,7 @@
 #include "Math/Color.h"
 #include "Styling/SlateColor.h"
 
-#define BLINK_ANIMATION_TIME 1.f
+#define BLINK_ANIMATION_TIME 0.5f
 #define BLINK_THRESHOLD 0.25f
 
 void UPlayerHealthBar::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
@@ -56,19 +56,18 @@ void UPlayerHealthBar::UpdatePlayerHealthBar(int NewHealth, int MaxHealth)
 void UPlayerHealthBar::LowHealthBlink()
 {
 	FProgressBarStyle Style = HealthBar.Get()->GetWidgetStyle();
-	FSlateColor color;
 	
 	if(bBlinkTurningRed)
 	{
-		color = FSlateColor(FColor::Green);
+		Style.FillImage.TintColor = FColor::Green;
 		bBlinkTurningRed = false;
 	}
 	else
 	{
-		color = FSlateColor(FColor::Red);
+		Style.FillImage.TintColor = FColor::Red;
 		bBlinkTurningRed = true;
 	}
 	
-	Style.FillImage.TintColor = color;
+	HealthBar->SetWidgetStyle(Style);
 	BlinkTimer = 0.f;
 }

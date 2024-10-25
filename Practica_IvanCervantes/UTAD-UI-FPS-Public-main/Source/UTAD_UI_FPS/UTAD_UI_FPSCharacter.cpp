@@ -9,6 +9,8 @@
 #include "EnhancedInputSubsystems.h"
 
 // UI
+#include "KismetTraceUtils.h"
+#include "UTAD_UI_FPS_Enemy.h"
 #include "Blueprint/UserWidget.h"
 #include "Blueprint/WidgetBlueprintLibrary.h"
 #include "UI/PlayerHUD.h"
@@ -75,6 +77,27 @@ void AUTAD_UI_FPSCharacter::BeginPlay()
 	{
 		UE_LOG(LogTemp, Error, TEXT("Player HUD Widget not assigned to UTAD_UI_FPSCharacter"));
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Player HUD Widget not assigned to UTAD_UI_FPSCharacter"));
+	}
+}
+
+void AUTAD_UI_FPSCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	FVector StartTrace = FirstPersonCameraComponent->GetComponentLocation();
+	FVector EndTrace = FirstPersonCameraComponent->GetForwardVector() * 2000 + FirstPersonCameraComponent->GetComponentLocation();
+	FHitResult HitResult;
+	 GetWorld()->LineTraceSingleByChannel(
+	 	HitResult,
+	 	StartTrace,
+	 	EndTrace,ECC_Visibility);
+	
+	if(Cast<AUTAD_UI_FPS_Enemy>(HitResult.GetActor()) && Cast<UStaticMeshComponent>(HitResult.Component))
+	{
+		PlayerHUDInstance.Get()->UpdateCrosshair(true);
+	}
+	else
+	{
+		PlayerHUDInstance.Get()->UpdateCrosshair(false);
 	}
 }
 
@@ -148,6 +171,7 @@ void AUTAD_UI_FPSCharacter::SetHealth(int NewHealth)
 	if (ClampedNewHealth != Health)
 	{
 		Health = ClampedNewHealth;
+		PlayerHUDInstance->PlayHitAnimation();
 	}
 	PlayerHUDInstance->UpdateHealthBar(Health, MaxHealth);
 }

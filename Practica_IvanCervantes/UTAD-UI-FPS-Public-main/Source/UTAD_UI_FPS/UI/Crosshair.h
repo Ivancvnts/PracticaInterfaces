@@ -6,6 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include "Crosshair.generated.h"
 
+class UImage;
 class UWidgetAnimation;
 /**
  * 
@@ -26,7 +27,16 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Visibility)
 	void PlayCrosshairAnimation();
 
+	void UpdateCrosshair(bool EnemyInSight);
+
 private:
 	UPROPERTY(Transient, meta = (BindWidgetAnim))
 	TObjectPtr<UWidgetAnimation> FireAnimation;
+	UPROPERTY(VisibleAnywhere, meta = (BindWidget))
+	TObjectPtr<UImage> CrosshairImage;
+
+	UPROPERTY(EditAnywhere, Category = "Crosshair")
+	TObjectPtr<UTexture2D> NormalTexture;
+	UPROPERTY(EditAnywhere, Category = "Crosshair")
+	TObjectPtr<UTexture2D> EnemyTexture;
 };

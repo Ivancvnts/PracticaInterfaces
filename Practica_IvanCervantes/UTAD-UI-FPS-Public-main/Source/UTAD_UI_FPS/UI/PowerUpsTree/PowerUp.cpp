@@ -37,6 +37,7 @@ void UPowerUp::OnObtained()
 	{
 		NextPowerUp->SetCanBeObtained();
 	}
+	OnPowerUpObtained.Broadcast(cost);
 	Obtained = true;
 }
 
@@ -75,6 +76,7 @@ void UPowerUp::OnButtonReleased()
 	if(ProgressPercent < 1.0f)
 	{
 		ProgressBar.Get()->SetPercent(0);
+		ProgressPercent = 0;
 	}
 	IsButtonPressed = false;
 }

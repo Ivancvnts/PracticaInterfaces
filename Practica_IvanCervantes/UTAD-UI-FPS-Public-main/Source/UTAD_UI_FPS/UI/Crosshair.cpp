@@ -3,6 +3,8 @@
 
 #include "Crosshair.h"
 
+#include "Components/Image.h"
+
 void UCrosshair::Show()
 {
 	SetVisibility(ESlateVisibility::HitTestInvisible);
@@ -16,4 +18,16 @@ void UCrosshair::Hide()
 void UCrosshair::PlayCrosshairAnimation()
 {
 	PlayAnimation(FireAnimation);
+}
+
+void UCrosshair::UpdateCrosshair(bool EnemyInSight)
+{
+	if(EnemyInSight)
+	{
+		CrosshairImage.Get()->SetBrushFromTexture(EnemyTexture);
+	}
+	else
+	{
+		CrosshairImage.Get()->SetBrushFromTexture(NormalTexture);
+	}
 }

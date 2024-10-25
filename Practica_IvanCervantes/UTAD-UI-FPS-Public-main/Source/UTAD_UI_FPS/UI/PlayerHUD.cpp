@@ -7,6 +7,7 @@
 #include "PlayerHealthBar.h"
 #include "ReloadBar.h"
 #include "Kismet/GameplayStatics.h"
+#include "ProfilingDebugging/CookStats.h"
 #include "UTAD_UI_FPS/TP_WeaponComponent.h"
 #include "UTAD_UI_FPS/UTAD_UI_FPSCharacter.h"
 
@@ -40,6 +41,11 @@ void UPlayerHUD::Hide()
 	
 }
 
+void UPlayerHUD::UpdateCrosshair(bool EnemyInSight)
+{
+	Crosshair->UpdateCrosshair(EnemyInSight);
+}
+
 void UPlayerHUD::UpdateCurrentAmmo(int newCurrentAmmo)
 {
 	AmmoCounter->UpdateCurrentAmmo(newCurrentAmmo);
@@ -68,4 +74,9 @@ void UPlayerHUD::UpdateHealthBar(int Health, int MaxHealth)
 void UPlayerHUD::StartSplashAnimation()
 {
 	PlayAnimation(BeginSplash);
+}
+
+void UPlayerHUD::PlayHitAnimation()
+{
+	PlayAnimation(HitAnimation);
 }
